@@ -1,0 +1,5 @@
+[client]
+database = referral_database
+user = root	
+password = thapa
+default-character-set = utf8

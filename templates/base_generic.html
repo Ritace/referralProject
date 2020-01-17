@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Referral Project{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href= "{% static 'css/dashboard.css'%}" >
+  <link rel="stylesheet" href= "{% static 'css/forms.css'%}" >
+</head>
+<body>
+  <div class="page-wrapper chiller-theme {% if user.is_authenticated %} toggled {% endif %}">
+    {% if user.is_authenticated %}
+    <div class="sidebar-wrapper">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+          <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+            <div class="sidebar-brand">
+              <a href="#">Kailash <br/>Mansarovar <br/> Referral</a>
+               <div id="close-sidebar">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+            <div class="sidebar-header">
+              <div class="user-pic">
+                <span> <i class="fa fa-user"></i></span>
+              </div>
+              <div class="user-info">
+                <span class="user-name"> {{ user.profile.first_name }} 
+                  <strong>{{ request.user.profile.last_name }}</strong>
+                
+                </span>
+                <span class="user-status">
+                  <i class="fa fa-circle"></i>
+                  <span>Online</span>
+                </span>
+              </div>
+            </div>
+          
+            <!-- sidebar-search  -->
+            <div class="sidebar-menu">
+              <ul>
+                
+                <a href="{% url 'dashboard:profile_update' user.profile.id %}">
+                  <li class="header-menu">
+                    <span>Profile</span>
+                  </li>
+                </a>
+                <a href= "{% url 'dashboard:referralList' %}">
+                  <li class="header-menu">
+                    <span>Your Referrals</span>
+                  </li>
+                </a>
+                <a href = "{% url 'dashboard:dashboard' %}" >
+                  <li class="header-menu">
+                    <span>Referral Form</span>
+                  </li>
+                </a>
+              </ul>
+            </div>
+            <!-- sidebar-menu  -->
+          </div>
+           <div class="sidebar-footer">
+            <a href="{% url 'logout' %}">
+              <i class="fa fa-sign-out-alt"></i>
+              LogOut
+            </a>
+            
+            </a>
+          </div>
+         
+        </nav>
+    
+    </div>
+    {% endif %}
+    <main class="page-content">
+      <div class="container-fluid">
+        {% block content %}
+        
+        {% endblock %}  
+      </div>
+
+    </main>
+    <!-- page-content" -->
+</div>
+
+  
+  
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+  <script src = "{% static 'js/dashboard_menu.js' %}"></script>
+</body>
+
+</html>

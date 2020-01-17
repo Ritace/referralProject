@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  
+  
+  <div class="wrapper fadeInDown">
+    {% if form.errors %}
+      <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+      {% else %}
+        <p>Please login to see this page.</p>
+      {% endif %}
+    {% endif %}
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <div class='form-title'>
+          Kailash Mansarovar Referral
+      </div>
+
+      <!-- Login Form -->
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+        <input type="submit" class="fadeIn fourth" value="Log In">
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="{% url 'signup:register' %}">Dont have an account?</a>
+      </div>
+
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+{% endblock %}
